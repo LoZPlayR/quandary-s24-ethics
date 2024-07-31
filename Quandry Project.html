@@ -1,0 +1,118 @@
+<tw-storydata name="Quandry Project" startnode="" creator="Twine" creator-version="2.9.0" format="SugarCube" format-version="2.36.1" ifid="4f928aeb-dc22-4dac-a6f0-6e9e164a6a68" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Page 1" tags="" position="425,425" size="100,100"></tw-passagedata><tw-passagedata pid="2" name="Cont1" tags="" position="425,550" size="100,100"></tw-passagedata><tw-passagedata pid="3" name="Info1" tags="" position="425,675" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="Resp1" tags="" position="425,800" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;set $villager = {
+	&quot;Name&quot; : &quot;Name&quot;,
+	&quot;Comment&quot; : 5,
+	&quot;Status&quot; : 3
+}&gt;&gt;
+
+&lt;span id=&quot;sol&quot;&gt;test sol&lt;/span&gt;
+
+&lt;&lt;set $assignments = [&quot;unassigned&quot;, &quot;fact&quot;, &quot;sol&quot;, &quot;useful&quot;]&gt;&gt;
+
+&lt;&lt;set $useful_comments = [&quot;fact1&quot;, &quot;fact2&quot;, &quot;fact3&quot;, &quot;fact4&quot;, &quot;sol1&quot;, &quot;sol2&quot;, &quot;sol3&quot;, &quot;sol4&quot;,  &quot;other1&quot;, &quot;other2&quot;, &quot;other3&quot;, &quot;other4&quot;]&gt;&gt;
+
+&lt;&lt;set $villagers = [&quot;villager1&quot;, &quot;villager2&quot;, &quot;villager3&quot;, &quot;villager4&quot;, &quot;villager5&quot;, &quot;villager6&quot;, &quot;villager7&quot;, &quot;villager8&quot;, &quot;villager9&quot;, &quot;villager10&quot;, &quot;villager11&quot;, &quot;villager12&quot;]&gt;&gt;
+
+&lt;&lt;set $status = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]&gt;&gt;
+/* 0 = no status, 1 = assigned as sol, 2 = assigned as fact, 3 = assigned as other */
+
+&lt;&lt;set $is_selected = 13&gt;&gt;
+&lt;&lt;set $info = &quot;&quot;&gt;&gt;
+
+/*
+&lt;&lt;script&gt;&gt;
+  
+setup.reloadAssignments = function() {
+	for(let  _j = 0; _j &lt; 4; _j++){
+    	
+        &lt;&lt;replace #sol&gt;&gt;
+       $(&#39;#&#39; + $assignments[_j]).
+        
+            &lt;&lt;for _i = 0; _i &lt; 12; _i++&gt;&gt;
+            
+                &lt;&lt;capture _i&gt;&gt;
+                &lt;&lt;if status[_i] === _j&gt;&gt;
+                    &lt;&lt;link $villagers[_i]&gt;&gt;
+                        &lt;&lt;set $info to $useful_comments[_i]&gt;&gt;
+                        &lt;&lt;set $is_selected to _i&gt;&gt;
+
+                        &lt;&lt;replace &quot;#information&quot;&gt;&gt;
+                            &lt;&lt;=$info&gt;&gt;
+                        &lt;&lt;/replace&gt;&gt;
+
+                    &lt;&lt;/link&gt;&gt;&lt;br&gt;
+                    &lt;&lt;/capture&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+
+            &lt;&lt;/for&gt;&gt;
+            
+        &lt;&lt;/replace&gt;&gt;
+    }
+}
+
+&lt;&lt;/script&gt;&gt;
+*/
+
+&lt;&lt;/nobr&gt;&gt;
+
+VILLAGERS:
+
+&lt;&lt;nobr&gt;&gt;
+&lt;span id=&quot;unassigned&quot;&gt;
+&lt;&lt;for _i = 0; _i &lt; 12; _i++&gt;&gt;
+	&lt;&lt;capture _i&gt;&gt;
+    &lt;&lt;=status[_i]&gt;&gt;
+    &lt;&lt;if status[_i] === 0&gt;&gt;
+        &lt;&lt;link $villagers[_i]&gt;&gt;
+            &lt;&lt;set $info to $useful_comments[_i]&gt;&gt;
+            &lt;&lt;set $is_selected to _i&gt;&gt;
+            &lt;&lt;replace &quot;#information&quot;&gt;&gt;
+                &lt;&lt;=$info&gt;&gt;
+            &lt;&lt;/replace&gt;&gt;
+
+        &lt;&lt;/link&gt;&gt;&lt;br&gt;
+        &lt;&lt;/if&gt;&gt;
+    &lt;&lt;/capture&gt;&gt;
+    
+&lt;&lt;/for&gt;&gt;
+&lt;/span&gt;
+&lt;&lt;/nobr&gt;&gt;
+SELECTED:
+
+&lt;span id=&quot;information&quot;&gt;&lt;&lt;=$info&gt;&gt;&lt;/span&gt;
+
+ASSIGNED SOLUTIONS:
+
+&lt;span id=&quot;sol&quot;&gt;&lt;/span&gt;
+
+ASSIGNED FACTS:
+
+&lt;span id=&quot;fact&quot;&gt;&lt;/span&gt;
+
+ASSIGNED OTHER OPINIONS:
+
+&lt;span id=&quot;other&quot;&gt;&lt;/span&gt;
+
+
+
+&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if is_selected != 13&gt;&gt;
+    &lt;&lt;button &quot;[ASSIGN AS SOLUTION]&quot;&gt;&gt;
+        reloadAssignments()
+    &lt;&lt;/button&gt;&gt;
+
+    &lt;&lt;button &quot;[ASSIGN AS FACT]&quot;&gt;&gt;
+        reloadAssignments()
+    &lt;&lt;/button&gt;&gt;
+
+    &lt;&lt;button &quot;[ASSIGN AS OTHER OPINION]&quot;&gt;&gt;
+        reloadAssignments()
+    &lt;&lt;/button&gt;&gt;
+&lt;&lt;else&gt;&gt;
+	&lt;&lt;button &quot;[UNASSIGN]&quot;&gt;&gt;
+        reloadAssignments()
+    &lt;&lt;/button&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+
+</tw-passagedata></tw-storydata>
